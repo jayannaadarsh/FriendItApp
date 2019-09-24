@@ -26,9 +26,16 @@ public class UserServiceImpl implements UserService {
 				return false;
 
 		}
-		dao.saveUser(ub);
-		sendmail.sendKey(ub.getEmail());
-		return true;
+		if(ub.getPassword().equals(ub.getConfirm_password()))
+		{
+			dao.saveUser(ub);
+			sendmail.sendKey(ub.getEmail());
+			return true;
+			
+		}
+		return false;
+		
+		
 
 	}
 

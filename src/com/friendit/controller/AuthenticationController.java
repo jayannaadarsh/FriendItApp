@@ -18,11 +18,12 @@ public class AuthenticationController {
 	public String login(@ModelAttribute("user") UserBean ub, Model model) {
 		System.out.println(ub.toString());
 
-		if (ub.getEmail() != "") {
+		if (ub.getEmail() != "" && ub.getPassword()!="") {
 			if (loginservice.validateLogin(ub)) {
 				return "Home";
 			}
 		}
+		model.addAttribute("status", "Invalid credentials. Please provide valid information.");
 		return "Landing";
 	}
 

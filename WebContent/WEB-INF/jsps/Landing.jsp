@@ -32,7 +32,7 @@
 				type="Password" path="password"/><br><s:errors path="password"></s:errors>
 			<br>
 			<p>
-				<a href="Forgot Password">Forgot Password</a>
+				<a href="ForgotPassword">Forgot Password</a>
 			</p>
 			<input class="btn1" type="submit" value="Login"/>
 		</fieldset>

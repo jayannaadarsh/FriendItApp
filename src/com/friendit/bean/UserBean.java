@@ -4,12 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class UserBean {
 
 	@Id
@@ -21,7 +23,7 @@ public class UserBean {
 	private String email;
 	@NotEmpty
 	private String password;
-	@NotEmpty
+	@Transient
 	private String confirm_password;
 	@NotEmpty
 	private String firstname;

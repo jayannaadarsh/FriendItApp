@@ -29,14 +29,13 @@ public class FriendItHomeController {
 
 	@RequestMapping("/saveuser")
 	public String saveUser(@ModelAttribute("user") @Valid UserBean ub, BindingResult result, Model model) {
-
 		System.out.println("this is in controlller" + ub);
 		if (result.hasErrors())
 			return "Register";
 		else {
 			if(service.createUser(ub))
 			model.addAttribute("status", "Registeration Sucess");
-			return "Landing";
+			return "RegistrationSuccess";
 		}
 		
 
