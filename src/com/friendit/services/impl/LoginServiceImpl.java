@@ -14,7 +14,7 @@ public class LoginServiceImpl implements LoginService {
 
 	public boolean validateLogin(UserBean ub) {
 
-		UserBean daoUB = loginDAO.getUserByEmail(ub.getEmail());
+		UserBean daoUB = getUserByEmail(ub.getEmail());
 		if (daoUB != null) {
 			if (daoUB.getEmail().equalsIgnoreCase(ub.getEmail()))
 				if (daoUB.getPassword().equals(ub.getPassword())) {
@@ -23,6 +23,11 @@ public class LoginServiceImpl implements LoginService {
 		}
 
 		return false;
+
+	}
+
+	public UserBean getUserByEmail(String email) {
+		return loginDAO.getUserByEmail(email);
 
 	}
 

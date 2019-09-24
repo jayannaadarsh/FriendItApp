@@ -6,7 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
+
+
 HOME PAGE
+
+${user.email}
+${user.gender}
+${user.password}
+${user.email}
+${user.email}
+
+<a href="logout">Click to logout</a>
 </body>
 </html>
