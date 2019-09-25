@@ -18,7 +18,7 @@
 
 		<c:if test="${not empty searchedUser}">
 			<c:forEach var="friends1" items="${searchedUser}">
-			<form action = "addasfriend">
+			<form action = "addasfriend" method="post">
 						Name : <span>${friends1.firstname}</span>
 				</br>
 						DOB : <span>${friends1.dob}</span>
@@ -27,7 +27,8 @@
 				</br>
 						Email : <span>${friends1.email}</span>
 				</br>
-				<button type="submit" name="sl" value="${friends1.sl}" class="button">Add Friend</button>
+				<button type="submit" name="receiverId" value="${friends1.sl}" class="button">Add Friend</button>
+				
 				</form>
 
 
@@ -35,7 +36,7 @@
 		</c:if>
 
 	</ul>
-	
+<c:if test="${not empty requestStatus}"> ${requestStatus} </c:if> <br>
 <c:if test="${empty friends1}"> No Results Found </c:if>
 
 

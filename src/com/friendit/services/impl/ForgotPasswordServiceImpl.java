@@ -17,7 +17,6 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
 	@Autowired
 	SendEmail sendmail;
 
-	@Override
 	public boolean resetPassword(String email) {
 		UserBean ub = forgotpass.getUserByEmail(email);
 		if (ub.getEmail() == "") {
@@ -26,11 +25,11 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
 			String newpass = getPassword();
 			ub.setPassword(newpass);
 			String message = "Hi, this is your new password: " + newpass + "\nNote: for security reason, "
-	                + "you must change your password after logging in.";
+					+ "you must change your password after logging in.";
 			EmailObject emailObj = new EmailObject(ub.getEmail(), "Your Password has been Reset", message);
 			sendmail.sendNewPassword(emailObj);
 			forgotpass.updateUSer(ub);
-			
+
 			return true;
 		}
 	}

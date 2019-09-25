@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.friendit.bean.FriendRequest;
 import com.friendit.bean.UserBean;
 import com.friendit.dao.FriendsDao;
 
@@ -18,7 +19,6 @@ public class FriendsDAOImpl implements FriendsDao {
 	@Autowired
 	SessionFactory sf;
 
-	@Override
 	public List<UserBean> getFriends(long id) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
@@ -30,8 +30,6 @@ public class FriendsDAOImpl implements FriendsDao {
 
 	}
 
-	// or firstname like ? or lastname like ?
-	@Override
 	public List<UserBean> getFriends(String searchquery) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
@@ -48,6 +46,19 @@ public class FriendsDAOImpl implements FriendsDao {
 		session.close();
 		return resultList;
 
+	}
+
+	public int sendFriendRequest(FriendRequest friendRequest) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.save(friendRequest);
+		} catch (Exception e) {
+			return 1;
+		}
+		tx.commit();
+		session.close();
+		return 0;
 	}
 
 }

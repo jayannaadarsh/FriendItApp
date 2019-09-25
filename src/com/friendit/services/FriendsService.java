@@ -6,6 +6,9 @@ import com.friendit.bean.UserBean;
 
 public interface FriendsService {
 	public List<UserBean> getFriends(long id);
+
 	public List<UserBean> getFriends(String searchquery);
+
+	public String sendFriendRequest(UserBean ub, Long receiverId);
 
 }

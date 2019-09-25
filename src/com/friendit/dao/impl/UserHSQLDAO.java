@@ -47,4 +47,13 @@ public class UserHSQLDAO implements UserDAO {
 
 	}
 
+	public UserBean getUserById(Long receiverId) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println("executing select");
+		UserBean resultList =(UserBean) session.createQuery("from UserBean where id = "+receiverId +"").getSingleResult();
+		System.out.println(resultList);
+		return resultList;
+	}
+
 }

@@ -15,6 +15,7 @@ import com.friendit.utility.SendEmail;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDAO dao;
+	
 	@Autowired
 	SendEmail sendmail;
 
@@ -27,19 +28,21 @@ public class UserServiceImpl implements UserService {
 				return false;
 
 		}
-		if(ub.getPassword().equals(ub.getConfirm_password()))
-		{
+		if (ub.getPassword().equals(ub.getConfirm_password())) {
 			ub.setCreated_dt_tm(new Date());
 			ub.setActive(true);
 			dao.saveUser(ub);
 			sendmail.sendKey(ub.getEmail());
 			return true;
-			
+
 		}
 		return false;
-		
-		
 
+	}
+
+	public UserBean getUserById(Long receiverId) {
+		dao.getUserById(receiverId);
+		return null;
 	}
 
 }

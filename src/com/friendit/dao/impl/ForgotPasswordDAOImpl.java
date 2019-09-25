@@ -10,12 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import com.friendit.bean.UserBean;
 import com.friendit.dao.ForgotPasswordDao;
+
 @Repository
 public class ForgotPasswordDAOImpl implements ForgotPasswordDao {
 
 	@Autowired
 	SessionFactory sf;
-	@Override
+
 	public UserBean getUserByEmail(String email) {
 
 		System.out.println(email);
@@ -25,9 +26,9 @@ public class ForgotPasswordDAOImpl implements ForgotPasswordDao {
 				.setParameter("email", email).uniqueResultOptional();
 		UserBean daoUB = (UserBean) uniqueResultOptional.get();
 		return daoUB;
-		
+
 	}
-	@Override
+
 	public String updateUSer(UserBean ub) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
@@ -35,9 +36,7 @@ public class ForgotPasswordDAOImpl implements ForgotPasswordDao {
 		tx.commit();
 		session.close();
 		return "SUCCESS";
-		
+
 	}
-	
-	
 
 }
