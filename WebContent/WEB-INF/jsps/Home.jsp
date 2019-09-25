@@ -12,12 +12,9 @@
 
 HOME PAGE
 
-${user.email}
-${user.gender}
-${user.password}
-${user.email}
-${user.email}
 
-<a href="logout">Click to logout</a>
+<a href="logout">Click to logout</a><br>
+<a href="friends">friends</a>
+
 </body>
 </html>
