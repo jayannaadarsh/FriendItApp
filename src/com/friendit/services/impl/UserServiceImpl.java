@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public UserBean getUserById(Long receiverId) {
-		dao.getUserById(receiverId);
-		return null;
+		
+		return dao.getUserById(receiverId);
 	}
 
 }

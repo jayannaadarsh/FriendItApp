@@ -31,6 +31,7 @@ public class FriendsServiceImpl implements FriendsService {
 
 	public String sendFriendRequest(UserBean ub, Long receiverId) {
 		UserBean userById = userService.getUserById(receiverId);
+		System.out.println(userById);
 		String status = "";
 
 		if (userById == null) {
