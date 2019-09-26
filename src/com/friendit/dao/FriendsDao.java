@@ -12,7 +12,11 @@ public interface FriendsDao {
 	public List<UserBean> getFriends(String searchquery);
 
 	public int sendFriendRequest(FriendRequest friendRequest);
+
 	public boolean deleteFriendRequest(Long reveiver_uid, Long sender_uid);
-	 
+
+	public UserBean verifyFriends(Long sl, Long senderid);
+
+	public int acceptFriendRequest(UserBean ub, Long senderid);
 
 }
