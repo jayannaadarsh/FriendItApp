@@ -1,14 +1,12 @@
 package com.friendit.dao.impl;
 
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.friendit.bean.FriendRequest;
 import com.friendit.bean.UserBean;
 import com.friendit.dao.FriendsDao;
@@ -22,10 +20,10 @@ public class FriendsDAOImpl implements FriendsDao {
 	public List<UserBean> getFriends(long id) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
-		System.out.println("executing select");
-		Query createQuery = session.createQuery("from UserBean where id=:id");
-		Query setParameter = createQuery.setParameter("id", id);
-		List resultList = setParameter.getResultList();
+		System.out.println("executing select");	
+		Query createQuery = session.createQuery("from UserBean where sl in(select sender_UID from FriendRequest where receiver_UID ="+id+" and accepted=false)");
+		List resultList = createQuery.getResultList();
+		System.out.println("Friend request  "+resultList);
 		return resultList;
 
 	}

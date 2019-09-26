@@ -12,5 +12,7 @@ public interface FriendsDao {
 	public List<UserBean> getFriends(String searchquery);
 
 	public int sendFriendRequest(FriendRequest friendRequest);
+	
+	 
 
 }

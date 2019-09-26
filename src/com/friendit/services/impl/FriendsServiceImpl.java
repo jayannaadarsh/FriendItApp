@@ -15,7 +15,7 @@ import com.friendit.services.UserService;
 public class FriendsServiceImpl implements FriendsService {
 
 	@Autowired
-	FriendsDao friends;
+	FriendsDao friendsdao;
 
 	@Autowired
 	UserService userService;
@@ -26,7 +26,7 @@ public class FriendsServiceImpl implements FriendsService {
 	}
 
 	public List<UserBean> getFriends(String searchquery) {
-		return friends.getFriends(searchquery);
+		return friendsdao.getFriends(searchquery);
 	}
 
 	public String sendFriendRequest(UserBean ub, Long receiverId) {
@@ -42,7 +42,7 @@ public class FriendsServiceImpl implements FriendsService {
 		FriendRequest friendRequest = new FriendRequest();
 		friendRequest.setSender_UID(ub.getSl());
 		friendRequest.setReceiver_UID(receiverId);
-		int sendFriendRequest = friends.sendFriendRequest(friendRequest);
+		int sendFriendRequest = friendsdao.sendFriendRequest(friendRequest);
 		if (sendFriendRequest == 0) {
 			status = "Request sent";
 			return status;
@@ -51,5 +51,20 @@ public class FriendsServiceImpl implements FriendsService {
 			return status;
 		}
 	}
+
+	@Override
+	public List<UserBean> getFriendRequest(UserBean ub) {
+		List<UserBean> friends = friendsdao.getFriends(ub.getSl());
+		
+		return friends;
+	}
+
+	@Override
+	public String rejectRequest() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }

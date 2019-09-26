@@ -21,8 +21,15 @@ public class FriendsController {
 	FriendsService fs;
 
 	@RequestMapping("/friends")
-	public String showFriends(Model model) {
-
+	public String showFriends(Model model, HttpSession session) {
+		UserBean ub = (UserBean) session.getAttribute("MY_SESSION");
+		System.out.println(ub);
+		List<UserBean> friendRequest = fs.getFriendRequest(ub);
+		if(friendRequest.isEmpty()){
+			model.addAttribute("requststatus","False" );
+		}
+		model.addAttribute("requststatus","True");
+		model.addAttribute("friendrequests", friendRequest);
 		return "Friends";
 	}
 
@@ -45,5 +52,11 @@ public class FriendsController {
 		String sendFriendRequest = fs.sendFriendRequest(ub, receiverId);
 		model.addAttribute("requestStatus", sendFriendRequest);
 		return "Friends";
+	}
+	
+	@RequestMapping(value="/rejectrequest", method = RequestMethod.POST)
+	public String rejectFriendRequest(@RequestParam("senderid") Long senderid, Model model,HttpSession session){
+		UserBean ub = (UserBean) session.getAttribute("MY_SESSION");
+		return"Friends";
 	}
 }

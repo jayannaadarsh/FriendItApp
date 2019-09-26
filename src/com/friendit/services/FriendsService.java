@@ -10,5 +10,7 @@ public interface FriendsService {
 	public List<UserBean> getFriends(String searchquery);
 
 	public String sendFriendRequest(UserBean ub, Long receiverId);
+	public List<UserBean> getFriendRequest(UserBean ub);
+	public String rejectRequest();
 
 }
