@@ -15,6 +15,8 @@ HOME PAGE
 
 <a href="logout">Click to logout</a><br>
 <a href="friends">friends</a>
+<a href="FriendsRequest">friend Request</a>
+
 
 </body>
 </html>

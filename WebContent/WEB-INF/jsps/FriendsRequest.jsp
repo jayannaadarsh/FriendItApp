@@ -18,7 +18,7 @@
 						Name : <span>${requests.firstname}</span> </br> DOB : <span>${requests.dob}</span>
 						</br> Gender : <span>${requests.gender}</span> </br> Email : <span>${requests.email}</span>
 						</br>
-						<form action="accceptRequest" method="post">
+						<form action="acceptrequest" method="post">
 						<button type="submit" name="senderid" value="${requests.sl}"
 							class="button">Add Friend</button>
 							</form >
@@ -57,13 +57,9 @@
 		</c:if>
 
 	</ul>
-	<c:if test="${not empty acceptStatus}"> ${acceptStatus} </c:if>
-	<br>
 	<c:if test="${not empty requestStatus}"> ${requestStatus} </c:if>
 	<br>
 	<c:if test="${empty friends1}"> No Results Found </c:if>
-	
-	
 
 
 </body>

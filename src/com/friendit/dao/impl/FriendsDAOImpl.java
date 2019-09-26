@@ -1,12 +1,14 @@
 package com.friendit.dao.impl;
 
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.friendit.bean.FriendRequest;
 import com.friendit.bean.UserBean;
 import com.friendit.dao.FriendsDao;
@@ -20,10 +22,12 @@ public class FriendsDAOImpl implements FriendsDao {
 	public List<UserBean> getFriends(long id) {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
-		System.out.println("executing select");	
-		Query createQuery = session.createQuery("from UserBean where sl in(select sender_UID from FriendRequest where receiver_UID ="+id+" and accepted=false)");
+		System.out.println("executing select");
+		Query createQuery = session
+				.createQuery("from UserBean where sl in(select sender_UID from FriendRequest where receiver_UID =" + id
+						+ " and accepted=false)");
 		List resultList = createQuery.getResultList();
-		System.out.println("Friend request  "+resultList);
+		System.out.println("Friend request  " + resultList);
 		return resultList;
 
 	}
@@ -57,6 +61,33 @@ public class FriendsDAOImpl implements FriendsDao {
 		tx.commit();
 		session.close();
 		return 0;
+	}
+
+	@Override
+	public UserBean verifyFriends(Long sl, Long senderid) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println("executing select");
+		Query createQuery = session
+				.createQuery("from UserBean where sl in(select sender_UID from FriendRequest where receiver_UID =" + sl
+						+ " and sender_UID =" + senderid + "and accepted=false)");
+		UserBean resultList = (UserBean) createQuery.getSingleResult();
+		System.out.println("Friend request  " + resultList);
+		return resultList;
+	}
+
+	@Override
+	public int acceptFriendRequest(UserBean ub, Long senderid) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println("executing select");
+		Query createQuery = session.createQuery("update FriendRequest set accepted = true where receiver_UID ="
+				+ ub.getSl() + " and sender_UID =" + senderid + "and accepted=false)");
+		int executeUpdate = createQuery.executeUpdate();
+		tx.commit();
+		session.close();
+		return executeUpdate;
+
 	}
 
 }
