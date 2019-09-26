@@ -60,9 +60,12 @@ public class FriendsServiceImpl implements FriendsService {
 	}
 
 	@Override
-	public String rejectRequest() {
-		// TODO Auto-generated method stub
-		return null;
+	public String rejectRequest(UserBean ub, Long sender_uid) {
+		if(friendsdao.deleteFriendRequest(ub.getSl(), sender_uid)){
+			return"Request cancelled";
+		}
+		return "Something went Wrong";
+		
 	}
 	
 	

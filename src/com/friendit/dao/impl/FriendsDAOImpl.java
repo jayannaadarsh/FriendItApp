@@ -59,4 +59,20 @@ public class FriendsDAOImpl implements FriendsDao {
 		return 0;
 	}
 
+	@Override
+	public boolean deleteFriendRequest(Long receiver_uid, Long sender_uid) {
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		System.out.println("executing select");	
+		//from FriendRequest where receiver_UID ="+receiver_uid+" sender_UID = "+sender_uid+"and accepted=false
+		Query createQuery = session.createQuery("from FriendRequest where receiver_UID ="+receiver_uid+" and sender_UID = "+sender_uid+" and accepted = false");
+		System.out.println(createQuery);
+		FriendRequest request = (FriendRequest) createQuery.getSingleResult();
+		System.out.println("Deleting this request "+request);
+		session.delete(request);
+		tx.commit();
+		session.close();
+		return true;
+	}
+
 }

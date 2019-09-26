@@ -57,6 +57,8 @@ public class FriendsController {
 	@RequestMapping(value="/rejectrequest", method = RequestMethod.POST)
 	public String rejectFriendRequest(@RequestParam("senderid") Long senderid, Model model,HttpSession session){
 		UserBean ub = (UserBean) session.getAttribute("MY_SESSION");
+		String rejectRequeststatus = fs.rejectRequest(ub, senderid);
+		System.out.println(rejectRequeststatus);
 		return"Friends";
 	}
 }
