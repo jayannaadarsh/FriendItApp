@@ -11,10 +11,16 @@
 
 
 HOME PAGE
+<div>
+<form action="wallpost">
+<input type="text" name="content"/>
+<input type="submit">Post</input>
+</form>
+</div>
 
 
 <a href="logout">Click to logout</a><br>
-<a href="friends">friends</a>
+<a href="friends">friends</a><br>
 <a href="FriendsRequest">friend Request</a>
 
 

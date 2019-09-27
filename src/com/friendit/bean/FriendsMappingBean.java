@@ -1,9 +1,13 @@
 package com.friendit.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "friends_mapping")
@@ -14,6 +18,8 @@ public class FriendsMappingBean {
 	private int id;
 	private long senderId;
 	private long receiverId;
+	@CreationTimestamp
+	private Date created_dt_tm;
 
 	public int getId() {
 		return id;
