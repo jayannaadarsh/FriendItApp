@@ -4,19 +4,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<!-- 
 <script type="text/javascript">
 	window.history.forward();
 	function noBack() {
 		window.history.forward();
 	}
 </script>
+ onload="noBack();" onpageshow="if (event.persisted) noBack();"
+	onunload=""
+	 -->
 <head>
 <meta charset="utf-8">
 <title>FriendIt</title>
 <link href="./resources/css/stylee.css" rel="stylesheet" type="text/css">
 </head>
-<body onload="noBack();" onpageshow="if (event.persisted) noBack();"
-	onunload="">
+<body>
 	<div class="section1">
 		<!-- <h1>FriendIt.COM</h1> -->
 		<br> <img src="./resources/images/flower.jpg">

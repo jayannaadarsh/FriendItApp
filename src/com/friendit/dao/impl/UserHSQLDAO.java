@@ -43,6 +43,7 @@ public class UserHSQLDAO implements UserDAO {
 		System.out.println("executing select");
 		List<UserBean> resultList = session.createQuery("from UserBean").getResultList();
 		System.out.println(resultList);
+		session.close();
 		return resultList;
 
 	}
@@ -53,6 +54,7 @@ public class UserHSQLDAO implements UserDAO {
 		System.out.println("executing select");
 		UserBean resultList =(UserBean) session.createQuery("from UserBean where id = "+receiverId +"").getSingleResult();
 		System.out.println(resultList);
+		session.close();
 		return resultList;
 	}
 

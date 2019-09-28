@@ -27,6 +27,7 @@ public class FriendsDAOImpl implements FriendsDao {
 						+ " and accepted=false)");
 		List resultList = createQuery.getResultList();
 		System.out.println("Friend request  " + resultList);
+		session.close();
 		return resultList;
 
 	}
@@ -86,6 +87,7 @@ public class FriendsDAOImpl implements FriendsDao {
 						+ " and sender_UID =" + senderid + "and accepted=false)");
 		UserBean resultList = (UserBean) createQuery.getSingleResult();
 		System.out.println("Friend request  " + resultList);
+		session.close();
 		return resultList;
 	}
 
