@@ -17,7 +17,7 @@ function noBack() { window.history.forward(); }
     onpageshow="if (event.persisted) noBack();" onunload="">
 	<div class="section1">
 		<h1>FriendIt.COM</h1>
-		<br> <img src=".resources/images/flower.jpg">
+		<br> <img class="logo" src=".resources/images/flower.jpg">
 		<h2>Come Join Us!</h2>
 		<form action="register">
 			<input class="btn" name="Submit" type="submit" value="Register">
