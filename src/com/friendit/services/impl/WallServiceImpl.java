@@ -36,8 +36,8 @@ public class WallServiceImpl implements WallService {
 		WallContents wallPost = wallDao.getWallPost(sl);
 		System.out.println("In service 1st line"+wallPost);
 		if (wallPost != null) {
-			long likes = wallPost.getLikes();
-			wallPost.setLikes(likes + 1);
+			long like = wallPost.getLikes();
+			wallPost.setLikes(like + 1);
 			wallDao.updateWallPost(wallPost);
 		}
 
