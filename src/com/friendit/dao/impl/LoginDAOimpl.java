@@ -23,6 +23,7 @@ public class LoginDAOimpl implements LoginDao {
 		Optional uniqueResultOptional = session.createQuery("from UserBean where email=:email")
 				.setParameter("email", email).uniqueResultOptional();
 		UserBean daoUB = (UserBean) uniqueResultOptional.get();
+		session.close();
 		return daoUB;
 	}
 

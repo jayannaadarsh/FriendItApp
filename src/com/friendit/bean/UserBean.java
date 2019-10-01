@@ -7,12 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -41,10 +40,14 @@ public class UserBean {
 	private String dob;
 	@NotEmpty
 	private String gender;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<UserBean> friends;
 	private Date created_dt_tm;
 	private boolean isActive;
+
+	@OneToOne(mappedBy = "wallid")
+	private WallContents wallcontent;
+
 	public UserBean(String email, String password, String confirm_password, String firstname, String lastname,
 			String city, String dob, String gender, List<UserBean> friends, Date created_dt_tm, boolean isActive) {
 		super();
@@ -60,81 +63,107 @@ public class UserBean {
 		this.created_dt_tm = created_dt_tm;
 		this.isActive = isActive;
 	}
+
 	public UserBean() {
 		super();
 	}
+
 	public Long getSl() {
 		return sl;
 	}
+
 	public void setSl(Long sl) {
 		this.sl = sl;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getConfirm_password() {
 		return confirm_password;
 	}
+
 	public void setConfirm_password(String confirm_password) {
 		this.confirm_password = confirm_password;
 	}
+
 	public String getFirstname() {
 		return firstname;
 	}
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 	public String getLastname() {
 		return lastname;
 	}
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getDob() {
 		return dob;
 	}
+
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
+
 	public String getGender() {
 		return gender;
 	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 	public List<UserBean> getFriends() {
 		return friends;
 	}
+
 	public void setFriends(List<UserBean> friends) {
 		this.friends = friends;
 	}
+
 	public Date getCreated_dt_tm() {
 		return created_dt_tm;
 	}
+
 	public void setCreated_dt_tm(Date created_dt_tm) {
 		this.created_dt_tm = created_dt_tm;
 	}
+
 	public boolean isActive() {
 		return isActive;
 	}
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -152,6 +181,7 @@ public class UserBean {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -215,6 +245,7 @@ public class UserBean {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "UserBean [sl=" + sl + ", email=" + email + ", password=" + password + ", confirm_password="
@@ -223,6 +254,4 @@ public class UserBean {
 				+ ", isActive=" + isActive + "]";
 	}
 
-	
-	
 }

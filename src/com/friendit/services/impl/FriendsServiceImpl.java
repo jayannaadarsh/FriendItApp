@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.friendit.bean.FriendRequest;
+import com.friendit.bean.FriendsMappingBean;
 import com.friendit.bean.UserBean;
 import com.friendit.dao.FriendsDao;
+import com.friendit.services.FriendsMappingService;
 import com.friendit.services.FriendsService;
 import com.friendit.services.UserService;
 
@@ -15,10 +17,13 @@ import com.friendit.services.UserService;
 public class FriendsServiceImpl implements FriendsService {
 
 	@Autowired
-	FriendsDao friends;
+	FriendsDao friendsdao;
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	FriendsMappingService friendsMappingService;
 
 	public List<UserBean> getFriends(long id) {
 
@@ -26,7 +31,7 @@ public class FriendsServiceImpl implements FriendsService {
 	}
 
 	public List<UserBean> getFriends(String searchquery) {
-		return friends.getFriends(searchquery);
+		return friendsdao.getFriends(searchquery);
 	}
 
 	public String sendFriendRequest(UserBean ub, Long receiverId) {
@@ -38,11 +43,11 @@ public class FriendsServiceImpl implements FriendsService {
 			status = "User Not present";
 			return status;
 		}
-		
+
 		FriendRequest friendRequest = new FriendRequest();
 		friendRequest.setSender_UID(ub.getSl());
 		friendRequest.setReceiver_UID(receiverId);
-		int sendFriendRequest = friends.sendFriendRequest(friendRequest);
+		int sendFriendRequest = friendsdao.sendFriendRequest(friendRequest);
 		if (sendFriendRequest == 0) {
 			status = "Request sent";
 			return status;
@@ -50,6 +55,41 @@ public class FriendsServiceImpl implements FriendsService {
 			status = "Request failed";
 			return status;
 		}
+	}
+
+	@Override
+	public List<UserBean> getFriendRequest(UserBean ub) {
+		List<UserBean> friends = friendsdao.getFriends(ub.getSl());
+
+		return friends;
+	}
+
+	@Override
+	public String rejectRequest(UserBean ub, Long sender_uid) {
+		if(friendsdao.deleteFriendRequest(ub.getSl(), sender_uid)){
+			return"Request cancelled";
+		}
+		return "Something went Wrong";
+		
+	}
+
+	@Override
+	public String acceptFriendRequest(UserBean ub, Long senderid) {
+		UserBean friends = friendsdao.verifyFriends(ub.getSl(), senderid);
+		if (friends == null) {
+			return "Request not found";
+		}
+		int acceptFriendRequest = friendsdao.acceptFriendRequest(ub, senderid);
+		if (acceptFriendRequest == 1) {
+			FriendsMappingBean friendsBean = new FriendsMappingBean();
+			friendsBean.setReceiverId(ub.getSl());
+			friendsBean.setSenderId(senderid);
+			int saveFriends = friendsMappingService.saveFriends(friendsBean);
+			if (saveFriends == 1) {
+				return "request accepted";
+			}
+		}
+		return "request accept failed";
 	}
 
 }

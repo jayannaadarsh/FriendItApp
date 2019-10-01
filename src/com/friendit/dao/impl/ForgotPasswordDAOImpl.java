@@ -25,6 +25,7 @@ public class ForgotPasswordDAOImpl implements ForgotPasswordDao {
 		Optional uniqueResultOptional = session.createQuery("from UserBean where email=:email")
 				.setParameter("email", email).uniqueResultOptional();
 		UserBean daoUB = (UserBean) uniqueResultOptional.get();
+		session.close();
 		return daoUB;
 
 	}
